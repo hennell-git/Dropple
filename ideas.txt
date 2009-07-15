@@ -1,0 +1,31 @@
+Evil black circles
+Spikes to avoid
+Targets in the middle, no gravity
+Targets on the outside, no gravity
+Circles falling on one side, sort coloured from black circles and throw into targets
+Draw lines to direct circles into targets
+Click to absorb, click again to release in a different place
+Targets switch positions
+Sort by different criteria
+Powerups for getting three of the same colour in a row
+Clouds
+
+Bonuses for getting x of the same colour in a row:
+	But that increases the number required for that colour
+	Represented by moving target up
+	When something hits that colour you lose combo but reduce x
+	Lose if anything hits the top of the screen
+
+
+Powerups:
+
+Slow down
+Magnets
+
+
+Names:
+
+Circularity
+Homeward Round
+Dropple
+
