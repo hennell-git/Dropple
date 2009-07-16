@@ -212,7 +212,7 @@ package
 		
 		private function startup():void
 		{
-			var mainClass:Class = getDefinitionByName("Wsaf") as Class;
+			var mainClass:Class = getDefinitionByName("MainMenu") as Class;
 			
 			var mainObj: DisplayObject = new mainClass() as DisplayObject;
 			

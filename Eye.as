@@ -22,10 +22,10 @@ package
 		
 		private var pupil: Shape;
 		
-		public function Eye (side: int)
+		public function Eye (_x: Number, _y: Number)
 		{
-			x = (side < 0) ? -7 : 7;
-			y = -7;
+			x = _x;
+			y = _y;
 			
 		 	graphics.beginFill(0xFFFFFF);
 			graphics.drawCircle(0, 0, RADIUS);

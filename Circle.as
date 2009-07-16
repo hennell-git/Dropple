@@ -38,8 +38,8 @@ package
 			graphics.lineStyle(4, 0x000000);
 			graphics.drawCircle(0, 0, radius - 2);
 			
-			leftEye = new Eye(-1);
-			rightEye = new Eye(1);
+			leftEye = new Eye(-7, -7);
+			rightEye = new Eye(7, -7);
 			
 			addChild(leftEye);
 			addChild(rightEye);

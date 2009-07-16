@@ -85,9 +85,9 @@ package
 				musicChannel = music.play();
 				
 				// set up looping variables based on your mp3 encoding software
-				var leader:Number = 54;    // milliseconds gap at the start of the mp3
+				var leader:Number = 55;    // milliseconds gap at the start of the mp3
 				//var follower:Number = 50;  // milliseconds gap at the end of the mp3
-				var placeToStop:Number = 32290;
+				var placeToStop:Number = 32289;
 				
 				if (musicSyncTimer)
 				{
