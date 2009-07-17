@@ -151,11 +151,6 @@ package
 			}
 		}
 		
-		private static function mergeComplete (c: Circle): void
-		{
-			c.dead = true;
-		}
-		
 		private function removeCirclesFilter (c: Circle, index: int, arr: Array): Boolean
 		{
 			if (c.y > 430 + c.radius)

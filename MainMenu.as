@@ -58,6 +58,7 @@ package
 			button.y = 150;
 			
 			button.addEventListener(MouseEvent.CLICK, function (event: MouseEvent): void {
+				Settings.absorb = false;
 				parent.addChild(new Wsaf());
 				parent.removeChild(menu);
 			});
@@ -69,6 +70,7 @@ package
 			button.y = 250;
 			
 			button.addEventListener(MouseEvent.CLICK, function (event: MouseEvent): void {
+				Settings.absorb = true;
 				parent.addChild(new Wsaf());
 				parent.removeChild(menu);
 			});

@@ -12,6 +12,8 @@ package
 		
 		public var dead: Boolean;
 		
+		public var mass: Number = 1;
+		
 		public var touched: Boolean = false;
 		
 		public var mergeTarget: Circle = null;

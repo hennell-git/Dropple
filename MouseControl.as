@@ -52,10 +52,18 @@ package
 		
 		public function update (circles: Array) : void
 		{
+			var mx: Number;
+			var my: Number;
+			
 			if (dragTarget)
 			{
-				var dx : Number = dragTarget.mouseX * 0.002 - dragTarget.vx * 0.1;
-				var dy : Number = dragTarget.mouseY * 0.002 - dragTarget.vy * 0.1;
+				var massScale: Number = 1.0 / dragTarget.mass;
+				
+				mx = dragTarget.mouseX * dragTarget.scaleX;
+				my = dragTarget.mouseY * dragTarget.scaleY;
+				
+				var dx : Number = mx * 0.002 * massScale - dragTarget.vx * 0.1;
+				var dy : Number = my * 0.002 * massScale - dragTarget.vy * 0.1;
 				
 				dragTarget.vx += dx;
 				dragTarget.vy += dy;
@@ -71,7 +79,10 @@ package
 				
 				for each (var c : Circle in circles)
 				{
-					var thisDistSq : Number = c.mouseX * c.mouseX + c.mouseY * c.mouseY;
+					mx = c.mouseX * c.scaleX;
+					my = c.mouseY * c.scaleY;
+					
+					var thisDistSq : Number = mx * mx + my * my;
 					
 					if (thisDistSq < distSq)
 					{
