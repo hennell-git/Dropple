@@ -15,6 +15,7 @@ package
 		public var mass: Number = 1;
 		
 		public var touched: Boolean = false;
+		public var active: Boolean = true;
 		
 		public var mergeTarget: Circle = null;
 		

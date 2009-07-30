@@ -12,6 +12,8 @@ package
 		private var bestComboText: NumberTextField;
 		private var livesText: NumberTextField;
 		
+		public var isGameOver: Boolean = false;
+		
 		public function Score()
 		{
 			scoreText = new NumberTextField(640/2, 15, "", TextFieldAutoSize.CENTER, 40);
@@ -23,7 +25,7 @@ package
 			textY += 20;*/
 			
 			comboText = new NumberTextField(textX, textY, "Combo: ", TextFieldAutoSize.RIGHT);
-			textY += 20;
+			//textY += 20;
 			
 			bestComboText = new NumberTextField(textX, textY, "Best Combo: ", TextFieldAutoSize.RIGHT);
 			textY += 20;
@@ -36,7 +38,7 @@ package
 			addChild(scoreText);
 			//addChild(livesText);
 			addChild(highScoreText);
-			addChild(comboText);
+			//addChild(comboText);
 			addChild(bestComboText);
 		}
 		
@@ -52,27 +54,14 @@ package
 			score += scoreAdd;
 			combo += 1;
 			
-			c.y = 450; // hackish
-			
-			var text : MyTextField = new MyTextField(c.x, c.y, "+" + scoreAdd, TextFieldAutoSize.CENTER);
+			var text : String = "+" + scoreAdd;
 			
 			if (! c.touched)
 			{
-				text.text += "\nNo hands!";
-				c.y -= 16;
+				text += "\nNo hands!";
 			}
 			
-			addChild(text);
-			
-			TweenLite.to(text, 1.0, {y: (c.y - 65)});
-			
-			TweenLite.to(text, 0.5, {
-				alpha: 0,
-				delay: 0.6,
-				overwrite: 0,
-				onComplete: removeChild,
-				onCompleteParams: [text]
-			});
+			spawnText(text, c.x);
 		}
 		
 		public function minus (c : Circle): void
@@ -80,21 +69,64 @@ package
 			score -= 100;
 			combo = 0;
 			
-			c.y = 450; // hackish
+			spawnText("-100", c.x);
+		}
+		
+		public function gameOver (c: Circle): void
+		{
+			spawnText("Game Over", c.x);
 			
-			var text : MyTextField = new MyTextField(c.x, c.y, "-100", TextFieldAutoSize.CENTER);
+			isGameOver = true;
+			
+			var retryButton: Button = new Button("Again!", 32, 200, 0x0080FF);
+			
+			retryButton.x = 320 - retryButton.width / 2;
+			retryButton.y = 215 - retryButton.height / 2;
+			
+			var menuButton: Button = new Button("Menu", 32, 200, 0x00FF00);
+			
+			menuButton.x = 320 - menuButton.width / 2;
+			menuButton.y = 300 - menuButton.height / 2;
+			
+			addChild(retryButton);
+			addChild(menuButton);
+		}
+		
+		public function spawnText (s: String, spawnX: Number): void
+		{
+			var spawnY: Number = 450;
+			
+			var text : MyTextField = new MyTextField(spawnX, spawnY, s, TextFieldAutoSize.CENTER);
+			
+			var noOfLines: int = s.split("\n").length;
+			
+			spawnY -= 16 * (noOfLines - 1);
 			
 			addChild(text);
 			
-			TweenLite.to(text, 1.0, {y: (c.y - 65)});
+			TweenLite.to(text, 1.0, {y: (spawnY - 65)});
 			
-			TweenLite.to(text, 0.5, {
-				alpha: 0,
-				delay: 0.6,
-				overwrite: 0,
-				onComplete: removeChild,
-				onCompleteParams: [text]
-			});
+			if (s == "Game Over")
+			{
+				TweenLite.to(text, 1.0, {
+					x: 320 - text.width * 5 / 2,
+					y: 120 - text.height * 5 / 2,
+					scaleX: 5,
+					scaleY: 5,
+					delay: 1.0,
+					overwrite: 0
+				});
+			}
+			else
+			{
+				TweenLite.to(text, 0.5, {
+					alpha: 0,
+					delay: 0.6,
+					overwrite: 0,
+					onComplete: removeChild,
+					onCompleteParams: [text]
+				});
+			}
 		}
 		
 		public function set score(_score:int):void

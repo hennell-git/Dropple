@@ -19,11 +19,11 @@ package
 		public static var circles: Array;
 		private var targets: Array;
 		
-		private var score: Score;
+		public var score: Score;
 		
 		private var audioControl: AudioControl;
 		
-		private var peopleLayer: Sprite;
+		public var peopleLayer: Sprite;
 		private var targetLayer: Sprite;
 		
 		private var mouseControl: MouseControl;
@@ -36,9 +36,25 @@ package
 				case 1:
 					return 0x00FF00;
 				case 2:
-					return 0x0000FF;
+					return 0x0080FF;
 				case 3:
 					return 0xFFFF00;
+				default:
+					return 0x000000;
+			}
+		}
+		
+		public static function darkColour (id: int): int
+		{
+			switch (id) {
+				case 0:
+					return 0x800000;
+				case 1:
+					return 0x008000;
+				case 2:
+					return 0x0000FF;
+				case 3:
+					return 0x808000;
 				default:
 					return 0x000000;
 			}
@@ -73,6 +89,8 @@ package
 			{
 				var target: Target = new Target(i);
 				
+				targets.push(target);
+				
 				targetLayer.addChild(target);
 			}
 			
@@ -99,6 +117,7 @@ package
 				dt -= 20;
 				
 				update(20);
+				draw();
 			}
 		}
 		
@@ -112,6 +131,8 @@ package
 		
 		private function update (dt: int): void
 		{
+			if (score.isGameOver) { return; }
+			
 			totalTime += dt;
 			timer -= dt;
 			
@@ -142,10 +163,13 @@ package
 			CollisionManager.update(circles);
 			
 			circles = circles.filter(removeCirclesFilter);
-			
+		}
+		
+		private function draw (): void
+		{
 			mouseControl.draw();
 			
-			for each (circle in circles)
+			for each (var circle: Circle in circles)
 			{
 				circle.draw();
 			}
@@ -153,34 +177,10 @@ package
 		
 		private function removeCirclesFilter (c: Circle, index: int, arr: Array): Boolean
 		{
-			if (c.y > 430 + c.radius)
-			{
-				c.dead = true;
-				
-				if (c == MouseControl.dragTarget)
-				{
-					MouseControl.dragTarget = null;
-				}
-			}
+			targets[int(c.x / 160)].test(c, this);
 			
 			if (c.dead)
 			{
-				if (c.mergeTarget == null)
-				{
-					var i: int = c.x / 160;
-					
-					if (c.id == i)
-					{
-						score.plus(c);
-						AudioControl.playGood();
-					}
-					else
-					{
-						score.minus(c);
-						AudioControl.playWrong();
-					}
-				}
-				
 				// Remove from display list
 				peopleLayer.removeChild(c);
 				

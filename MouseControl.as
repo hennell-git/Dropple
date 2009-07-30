@@ -79,6 +79,8 @@ package
 				
 				for each (var c : Circle in circles)
 				{
+					if (! c.active || c.mergeTarget) { continue; }
+					
 					mx = c.mouseX * c.scaleX;
 					my = c.mouseY * c.scaleY;
 					

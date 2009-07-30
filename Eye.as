@@ -6,6 +6,7 @@ package
 	{
 		public const RADIUS: Number = 4;
 		private var _pupilSize: Number = 2;
+		private var pupil: Shape;
 		
 		public function get pupilSize (): Number
 		{
@@ -19,8 +20,6 @@ package
 			pupil.scaleX = n;
 			pupil.scaleY = n;
 		}
-		
-		private var pupil: Shape;
 		
 		public function Eye (_x: Number, _y: Number)
 		{

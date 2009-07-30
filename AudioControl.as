@@ -22,6 +22,9 @@ package
 		[Embed(source="audio/wrong.mp3")]
 		public static var wrongSrc:Class;
 		
+		[Embed(source="audio/gameover.mp3")]
+		public static var gameOverSrc:Class;
+		
 		private var soundOnImage : Bitmap;
 		private var soundOffImage : Bitmap;
 		
@@ -30,6 +33,7 @@ package
 		
 		private static var winSounds : Sound;
 		private static var wrong : Sound;
+		private static var gameOver : Sound;
 		
 		private static var musicSyncTimer: Timer;
 		
@@ -51,9 +55,9 @@ package
 			music = new musicSrc();
 			winSounds = new winSoundsSrc();
 			wrong = new wrongSrc();
+			gameOver = new gameOverSrc();
 			
 			playMusic();
-
 		}
 
 		public function toggleSound (e : Event) : void
@@ -64,15 +68,7 @@ package
 			soundOnImage.visible = ! mute;
 			
 			if (mute) {
-				if (musicChannel) {
-					musicChannel.stop();
-				}
-				
-				if (musicSyncTimer)
-				{
-					musicSyncTimer.stop();
-					musicSyncTimer = null;
-				}
+				stopMusic();
 			} else {
 				playMusic();
 			}
@@ -109,6 +105,19 @@ package
 			}
 		}
 		
+		public static function stopMusic (): void
+		{
+			if (musicChannel) {
+				musicChannel.stop();
+			}
+			
+			if (musicSyncTimer)
+			{
+				musicSyncTimer.stop();
+				musicSyncTimer = null;
+			}
+		}
+		
 		public static function playGood () : void
 		{
 			if (! mute)
@@ -135,6 +144,15 @@ package
 			if (! mute)
 			{
 				wrong.play();
+			}
+		}
+		
+		public static function playGameOver () : void
+		{
+			if (! mute)
+			{
+				gameOver.play();
+				stopMusic();
 			}
 		}
 	}
