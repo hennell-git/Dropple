@@ -46,6 +46,8 @@ package
 		
 		public static function darkColour (id: int): int
 		{
+			return 0x000000;
+			
 			switch (id) {
 				case 0:
 					return 0x800000;
@@ -160,7 +162,7 @@ package
 				circle.update(dt);
 			}
 			
-			CollisionManager.update(circles);
+			CollisionManager.update(circles, targets);
 			
 			circles = circles.filter(removeCirclesFilter);
 		}

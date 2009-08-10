@@ -38,7 +38,7 @@ package
 			graphics.drawCircle(0, 0, radius);
 			graphics.endFill();
 			
-			graphics.lineStyle(4, 0x000000);
+			graphics.lineStyle(4, darkColour(id));
 			graphics.drawCircle(0, 0, radius - 2);
 			
 			leftEye = new Eye(-7, -7);
@@ -56,9 +56,27 @@ package
 				case 1:
 					return 0x00FF00;
 				case 2:
-					return 0x0000FF;
+					return 0x0080FF;
 				case 3:
 					return 0xFFFF00;
+				default:
+					return 0x000000;
+			}
+		}
+		
+		public static function darkColour (id: int): int
+		{
+			return 0x000000;
+			
+			switch (id) {
+				case 0:
+					return 0x800000;
+				case 1:
+					return 0x008000;
+				case 2:
+					return 0x0000FF;
+				case 3:
+					return 0x808000;
 				default:
 					return 0x000000;
 			}

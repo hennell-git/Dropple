@@ -53,14 +53,13 @@ package
 			
 			var button: Button;
 			
-			button = new Button("Classic Mode", 32, 30, 0xFF0000);
+			button = new Button("Play", 32, 30, 0xFF0000);
 			button.x = 320 - button.width / 2;
 			button.y = 150;
 			
 			button.addEventListener(MouseEvent.CLICK, function (event: MouseEvent): void {
 				Settings.absorb = false;
-				parent.addChild(new Wsaf());
-				parent.removeChild(menu);
+				Main.screen = new Wsaf();
 			});
 			
 			addChild(button);
@@ -71,22 +70,23 @@ package
 			
 			button.addEventListener(MouseEvent.CLICK, function (event: MouseEvent): void {
 				Settings.absorb = true;
-				parent.addChild(new Wsaf());
-				parent.removeChild(menu);
+				Main.screen = new Wsaf();
 			});
 			
 			addChild(button);
 			
-			button = new Button("Endless Mode", 32, 30, 0x0000FF);
+			button = new Button("Classic Mode", 32, 30, 0x0000FF);
 			button.x = 320 - button.width / 2;
 			button.y = 350;
 			
 			button.addEventListener(MouseEvent.CLICK, function (event: MouseEvent): void {
-				parent.addChild(new Wsaf());
-				parent.removeChild(menu);
+				Settings.absorb = false;
+				Main.screen = new Wsaf();
 			});
 			
 			addChild(button);
+			
+			addChild(new MyTextField(320, 430, "(Apologies for the crappy placeholder menu)"));
 			
 			addEventListener(Event.ENTER_FRAME, onEnterFrame);
 		}

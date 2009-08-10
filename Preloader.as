@@ -34,12 +34,10 @@ package
 		{
 			addChild(new bgSrc());
 			
+			addChild(new Main());
+			
 			if (this.loaderInfo.bytesLoaded < this.loaderInfo.bytesTotal)
 			{
-				graphics.beginFill(0xFFFFFF)
-				graphics.drawRect(0, 0, 640, 480);
-				graphics.endFill();
-				
 				preloader = new Sprite();
 				
 				circles = [];
@@ -72,7 +70,7 @@ package
 				
 				preloader.addChild(mouseControl);
 				
-				addChild(preloader);
+				Main.screen = preloader;
 				
 				time = getTimer();
 				
@@ -143,7 +141,6 @@ package
 			{
 				removeEventListener(Event.ENTER_FRAME, onEnterFrame);
 				startup();
-				removeChild(preloader);
 				preloader = null;
 			}
 			
@@ -216,8 +213,8 @@ package
 			
 			var mainObj: DisplayObject = new mainClass() as DisplayObject;
 			
-			addChild(mainObj);
-		}
+			Main.screen = mainObj;
+		}
 	}
 
 }

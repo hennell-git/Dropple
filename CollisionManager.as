@@ -4,11 +4,21 @@ package
 	
 	public class CollisionManager
 	{
-		public static function update (circles: Array): void
+		private static const emptyArray: Array = new Array();
+		
+		public static function update (circles: Array, targets: Array = null): void
 		{
+			if (! targets)
+			{
+				targets = emptyArray;
+			}
+			
 			for (var i : int = 0; i < circles.length; i++)
 			{
 				var c1 : Circle = circles[i];
+				
+				var dx: Number;
+				var dy: Number;
 				
 				for (var j : int = i + 1; j < circles.length; j++)
 				{
@@ -16,8 +26,8 @@ package
 					
 					if (c1.mergeTarget || c2.mergeTarget) { continue; }
 					
-					var dx: Number = c2.x - c1.x;
-					var dy: Number = c2.y - c1.y;
+					dx = c2.x - c1.x;
+					dy = c2.y - c1.y;
 					
 					var dzSq: Number = dx * dx + dy * dy;
 					

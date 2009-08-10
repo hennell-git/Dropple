@@ -2,6 +2,7 @@ package
 {
 	import flash.display.*;
 	import flash.text.*;
+	import flash.events.*;
 	import gs.*;
 	
 	public class Score extends Sprite
@@ -74,22 +75,35 @@ package
 		
 		public function gameOver (c: Circle): void
 		{
-			spawnText("Game Over", c.x);
-			
 			isGameOver = true;
 			
 			var retryButton: Button = new Button("Again!", 32, 200, 0x0080FF);
 			
 			retryButton.x = 320 - retryButton.width / 2;
 			retryButton.y = 215 - retryButton.height / 2;
+			retryButton.alpha = 0;
+			
+			retryButton.addEventListener(MouseEvent.CLICK, function (event: MouseEvent): void {
+				Main.screen = new Wsaf();
+			});
 			
 			var menuButton: Button = new Button("Menu", 32, 200, 0x00FF00);
 			
 			menuButton.x = 320 - menuButton.width / 2;
 			menuButton.y = 300 - menuButton.height / 2;
+			menuButton.alpha = 0;
+			
+			menuButton.addEventListener(MouseEvent.CLICK, function (event: MouseEvent): void {
+				Main.screen = new MainMenu();
+			});
 			
 			addChild(retryButton);
 			addChild(menuButton);
+			
+			TweenLite.to(retryButton, 1.0, {alpha: 1, delay: 1.0});
+			TweenLite.to(menuButton, 1.0, {alpha: 1, delay: 1.0});
+			
+			spawnText("Game Over", c.x);
 		}
 		
 		public function spawnText (s: String, spawnX: Number): void
