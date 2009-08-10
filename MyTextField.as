@@ -5,12 +5,12 @@ package
 	
 	public class MyTextField extends TextField
 	{
-		[Embed(source="pixelhugger.ttf", fontName='pixelhugger', mimeType='application/x-font')]
+		[Embed(source="fonts/pixelhugger.ttf", fontName='pixelhugger', mimeType='application/x-font')]
 		public static var PixelHuggerFontSrc : Class;
 		
 		public static var pixelHuggerFont : Font = new PixelHuggerFontSrc();
 		
-		public function MyTextField (_x: Number, _y: Number, _text: String, _align: String = TextFieldAutoSize.CENTER, textSize: Number = 16)
+		public function MyTextField (_x: Number, _y: Number, _text: String, _align: String = TextFieldAutoSize.CENTER, textSize: Number = 16, _fontName: String = null)
 		{
 			x = _x;
 			y = _y;
@@ -20,7 +20,12 @@ package
 			selectable = false;
 			mouseEnabled = false;
 			
-			var _textFormat : TextFormat = new TextFormat(pixelHuggerFont.fontName, textSize);
+			if (! _fontName)
+			{
+				_fontName = pixelHuggerFont.fontName;
+			}
+			
+			var _textFormat : TextFormat = new TextFormat(_fontName, textSize);
 			
 			_textFormat.align = _align;
 			

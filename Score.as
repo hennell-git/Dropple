@@ -67,10 +67,7 @@ package
 		
 		public function minus (c : Circle): void
 		{
-			score -= 100;
 			combo = 0;
-			
-			spawnText("-100", c.x);
 		}
 		
 		public function gameOver (c: Circle): void
@@ -110,7 +107,14 @@ package
 		{
 			var spawnY: Number = 450;
 			
-			var text : MyTextField = new MyTextField(spawnX, spawnY, s, TextFieldAutoSize.CENTER);
+			var font: String = null;
+			
+			if (s == "Game Over")
+			{
+				font = "Maian";
+			}
+			
+			var text : MyTextField = new MyTextField(spawnX, spawnY, s, TextFieldAutoSize.CENTER, 16, font);
 			
 			var noOfLines: int = s.split("\n").length;
 			

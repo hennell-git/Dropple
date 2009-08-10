@@ -30,36 +30,12 @@ package
 		
 		public static function colour (id: int): int
 		{
-			switch (id) {
-				case 0:
-					return 0xFF0000;
-				case 1:
-					return 0x00FF00;
-				case 2:
-					return 0x0080FF;
-				case 3:
-					return 0xFFFF00;
-				default:
-					return 0x000000;
-			}
+			return Circle.colour(id);
 		}
 		
 		public static function darkColour (id: int): int
 		{
-			return 0x000000;
-			
-			switch (id) {
-				case 0:
-					return 0x800000;
-				case 1:
-					return 0x008000;
-				case 2:
-					return 0x0000FF;
-				case 3:
-					return 0x808000;
-				default:
-					return 0x000000;
-			}
+			return Circle.darkColour(id);
 		}
 		
 		public function Wsaf()

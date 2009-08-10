@@ -1,15 +1,21 @@
 package
 {
 	import flash.display.*;
+	import flash.text.*;
 	import flash.events.MouseEvent;
 	
 	public class Button extends Sprite
 	{
+		[Embed(source="fonts/Maian.ttf", fontName='Maian', mimeType='application/x-font')]
+		public static var MaianFontSrc : Class;
+		
+		public static var maianFont : Font = new MaianFontSrc();
+		
 		public var textField: MyTextField;
 		
 		public function Button (_text: String, _textSize: Number = 16, _width: Number = 0, _colour: int = 0xFF0000)
 		{
-			textField = new MyTextField(10, 5, _text, "left", _textSize);
+			textField = new MyTextField(10, 5, _text, "left", _textSize, maianFont.fontName);
 			
 			var _height: Number = textField.height + 10;
 			

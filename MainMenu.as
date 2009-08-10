@@ -16,7 +16,7 @@ package
 		
 		public function MainMenu ()
 		{
-			var title: DisplayObject = new titleSrc();
+			/*var title: DisplayObject = new titleSrc();
 			
 			title.x = 320 - title.width / 2;
 			title.y = 30;
@@ -47,15 +47,19 @@ package
 			for each (var eye: Eye in eyes)
 			{
 				addChild(eye);
-			}
+			}*/
+			
+			var title: MyTextField = new MyTextField(320, 130, "DROPPLE", "center", 72, Button.maianFont.fontName);
+			
+			addChild(title);
 			
 			var menu: DisplayObject = this;
 			
 			var button: Button;
 			
-			button = new Button("Play", 32, 30, 0xFF0000);
+			button = new Button("Play", 32, 300, 0xFF0000);
 			button.x = 320 - button.width / 2;
-			button.y = 150;
+			button.y = 250;
 			
 			button.addEventListener(MouseEvent.CLICK, function (event: MouseEvent): void {
 				Settings.absorb = false;
@@ -64,9 +68,9 @@ package
 			
 			addChild(button);
 			
-			button = new Button("Absorbathon Mode", 32, 30, 0x00FF00);
+			/*button = new Button("Absorbathon Mode", 32, 300, 0x0080FF);
 			button.x = 320 - button.width / 2;
-			button.y = 250;
+			button.y = 270;
 			
 			button.addEventListener(MouseEvent.CLICK, function (event: MouseEvent): void {
 				Settings.absorb = true;
@@ -75,7 +79,7 @@ package
 			
 			addChild(button);
 			
-			button = new Button("Classic Mode", 32, 30, 0x0000FF);
+			button = new Button("Classic Mode", 32, 300, 0x00FF00);
 			button.x = 320 - button.width / 2;
 			button.y = 350;
 			
@@ -86,7 +90,7 @@ package
 			
 			addChild(button);
 			
-			addChild(new MyTextField(320, 430, "(Apologies for the crappy placeholder menu)"));
+			addChild(new MyTextField(320, 330, "(Absorbathon mode still in early development)", "center", 16, 'Maian'));*/
 			
 			addEventListener(Event.ENTER_FRAME, onEnterFrame);
 		}
