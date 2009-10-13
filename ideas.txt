@@ -1,3 +1,5 @@
+Add faces
+Introduction to encourage fast-paced play?
 Evil black circles
 Spikes to avoid
 Targets in the middle, no gravity
@@ -28,4 +30,8 @@ Names:
 Circularity
 Homeward Round
 Dropple
+Blorbfall
+Falling Blorbs!
+Blorbing rain!
+The sky is raining Blorbs!
 
