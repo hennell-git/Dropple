@@ -54,6 +54,31 @@ package
 			addChild(protectionImage);
 		}
 		
+		public function update (game: Wsaf): void
+		{
+			if (! isProtected && Math.random() < 0.5)
+			{
+				var r: Number = Math.random() * 5 + 2;
+				var px: Number = Math.random() * (160 - r*2) + r + x;
+				var py: Number = 430 + r;
+				var vx: Number = Math.random() * 0.04 - 0.02;
+				var vy: Number = -Math.random() * 0.1 - 0.1 + r * 0.01;
+				
+				var p: Particle = new Particle(px, py, vx, vy);
+				
+				p.graphics.beginFill(Wsaf.colour(id));
+				p.graphics.drawCircle(0, 0, r);
+				p.graphics.endFill();
+				
+				var t: Number = Math.random() * 0.5 + 0.5;
+				var d: Number = Math.random() * 0.5 + 0.2;
+				
+				TweenLite.to(p, t, {alpha: 0, delay: d, onComplete: fadeoutComplete, onCompleteParams: [p]});
+				
+				game.addParticle(p);
+			}
+		}
+		
 		public function test (c: Circle, game: Wsaf): void
 		{
 			if (! c.active || c.mergeTarget) { return; }
@@ -62,6 +87,11 @@ package
 			
 			if (c.x > x && c.x < x + 160 && c.y + c.radius > 430)
 			{
+				c.active = false;
+				
+				MouseControl.dragTarget = null;
+				MouseControl.highlight = null;
+				
 				if (id == c.id)
 				{
 					score.plus(c);
@@ -89,7 +119,9 @@ package
 					
 						AudioControl.playGameOver();
 						
-						TweenLite.to(game.peopleLayer, 2.0, {alpha: 0, delay: 2.0});
+						TweenLite.to(game.circleLayer, 2.0, {alpha: 0, delay: 2.0});
+						
+						return; // this stops the offending circle from fading out early
 					}
 					
 					c.vy = -Math.min(0.25, Math.abs(c.vy));
@@ -97,16 +129,11 @@ package
 					c.y = 430 - c.radius;
 				}
 				
-				c.active = false;
-				
-				TweenLite.to(c, 0.5, {alpha: 0, onComplete: mergeComplete, onCompleteParams: [c]});
-				
-				MouseControl.dragTarget = null;
-				MouseControl.highlight = null;
+				TweenLite.to(c, 0.5, {alpha: 0, onComplete: fadeoutComplete, onCompleteParams: [c]});
 			}
 		}
 		
-		private static function mergeComplete (c: Circle): void
+		private static function fadeoutComplete (c: *): void
 		{
 			c.dead = true;
 		}

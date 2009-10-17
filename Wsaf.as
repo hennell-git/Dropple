@@ -17,13 +17,15 @@ package
 		private var difficulty: Number;
 		
 		public static var circles: Array;
+		private var particles: Array;
 		private var targets: Array;
 		
 		public var score: Score;
 		
 		private var audioControl: AudioControl;
 		
-		public var peopleLayer: Sprite;
+		public var particleLayer: Sprite;
+		public var circleLayer: Sprite;
 		private var targetLayer: Sprite;
 		
 		private var mouseControl: MouseControl;
@@ -40,6 +42,9 @@ package
 		
 		public function Wsaf()
 		{
+			particleLayer = new Sprite();
+			addChild(particleLayer);
+			
 			score = new Score();
 			
 			addChild(score);
@@ -48,10 +53,10 @@ package
 			
 			addChild(audioControl);
 			
-			peopleLayer = new Sprite();
+			circleLayer = new Sprite();
 			targetLayer = new Sprite();
 			
-			addChild(peopleLayer);
+			addChild(circleLayer);
 			addChild(targetLayer);
 			
 			mouseControl = new MouseControl();
@@ -60,6 +65,7 @@ package
 			
 			addChild(mouseControl);
 			
+			particles = [];
 			circles = [];
 			targets = [];
 			
@@ -130,7 +136,7 @@ package
 				
 				circles.push(circle);
 				
-				peopleLayer.addChild(circle);
+				circleLayer.addChild(circle);
 			}
 			
 			for each (circle in circles)
@@ -138,9 +144,21 @@ package
 				circle.update(dt);
 			}
 			
+			for each (var target: Target in targets)
+			{
+				target.update(this);
+			}
+			
+			for each (var p: Particle in particles)
+			{
+				p.update(dt);
+			}
+			
 			CollisionManager.update(circles, targets);
 			
 			circles = circles.filter(removeCirclesFilter);
+			
+			particles = particles.filter(removeParticlesFilter);
 		}
 		
 		private function draw (): void
@@ -153,6 +171,13 @@ package
 			}
 		}
 		
+		public function addParticle (p: Particle): void
+		{
+			particles.push(p);
+			
+			particleLayer.addChild(p);
+		}
+		
 		private function removeCirclesFilter (c: Circle, index: int, arr: Array): Boolean
 		{
 			targets[int(c.x / 160)].test(c, this);
@@ -160,7 +185,7 @@ package
 			if (c.dead)
 			{
 				// Remove from display list
-				peopleLayer.removeChild(c);
+				circleLayer.removeChild(c);
 				
 				// And remove from array
 				return false;
@@ -168,6 +193,23 @@ package
 			else
 			{
 				// c remains in array
+				return true;
+			}
+		}
+		
+		private function removeParticlesFilter (p: Particle, index: int, arr: Array): Boolean
+		{
+			if (p.dead)
+			{
+				// Remove from display list
+				particleLayer.removeChild(p);
+				
+				// And remove from array
+				return false;
+			}
+			else
+			{
+				// p remains in array
 				return true;
 			}
 		}
