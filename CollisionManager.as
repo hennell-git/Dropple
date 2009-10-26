@@ -13,12 +13,65 @@ package
 				targets = emptyArray;
 			}
 			
-			for (var i : int = 0; i < circles.length; i++)
+			var dx: Number;
+			var dy: Number;
+			var dz: Number;
+			
+			for (var i: int = 0; i < targets.length - 1; i++)
+			{
+				var lx: Number = targets[i+1].x;
+				var ly: Number = Math.min(targets[i].y, targets[i+1].y) - 25;
+				
+				for each (var c: Circle in circles)
+				{
+					var r: Number = c.radius + 1;
+					
+					if (c.y + r <= ly)
+					{
+						continue;
+					}
+					
+					if (c.y > ly)
+					{
+						dx = c.x - lx;
+						
+						if (dx >= r) { continue; }
+						else if (dx <= -r) { continue; }
+						
+						c.vx *= -1;
+						
+						if (dx > 0) { c.x = lx + r; }
+						else        { c.x = lx - r; }
+					}
+					else
+					{
+						dx = c.x - lx;
+						dy = c.y - ly;
+						
+						dz = Math.sqrt(dx * dx + dy * dy);
+						
+						if (dz >= r)
+						{
+							continue;
+						}
+						
+						dx /= dz;
+						dy /= dz;
+						
+						c.x = lx + dx * r;
+						c.y = ly + dy * r;
+						
+						var vz: Number = dx * c.vx + dy * c.vy;
+						
+						c.vx -= 2 * dx * vz;
+						c.vy -= 2 * dy * vz;
+					}
+				}
+			}
+			
+			for (i = 0; i < circles.length; i++)
 			{
 				var c1 : Circle = circles[i];
-				
-				var dx: Number;
-				var dy: Number;
 				
 				for (var j : int = i + 1; j < circles.length; j++)
 				{
@@ -56,7 +109,7 @@ package
 						}
 						else
 						{
-							var dz: Number = Math.sqrt(dzSq);
+							dz = Math.sqrt(dzSq);
 							
 							dx /= dz;
 							dy /= dz;
