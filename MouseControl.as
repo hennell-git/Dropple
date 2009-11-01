@@ -10,6 +10,9 @@ package
 		
 		private static var _dragTarget : Circle;
 		
+		private static var xArray: Array;
+		private static var yArray: Array;
+		
 		public static function get dragTarget (): Circle
 		{
 			return _dragTarget;
@@ -40,14 +43,16 @@ package
 		
 		public function MouseControl ()
 		{
-			dragTarget = null;
-			highlight = null;
+			init();
 		}
 		
 		public function init () : void
 		{
 			dragTarget = null;
 			highlight = null;
+			
+			xArray = new Array();
+			yArray = new Array();
 		}
 		
 		public function update (circles: Array) : void
@@ -111,20 +116,14 @@ package
 			if (dragTarget)
 			{
 				graphics.lineStyle(2, 0x000000, 0.5, true, LineScaleMode.NONE);
-				graphics.moveTo(0, 0);
-				graphics.lineTo(dragTarget.mouseX * dragTarget.scaleX, dragTarget.mouseY * dragTarget.scaleY);
-				
-				x = dragTarget.x;
-				y = dragTarget.y;
+				graphics.moveTo(dragTarget.x, dragTarget.y);
+				graphics.lineTo(mouseX, mouseY);
 			}
 			else if (highlight)
 			{
 				graphics.lineStyle(2, 0x000000, 0.2, true, LineScaleMode.NONE);
-				graphics.moveTo(0, 0);
-				graphics.lineTo(highlight.mouseX * highlight.scaleX, highlight.mouseY * highlight.scaleY);
-				
-				x = highlight.x;
-				y = highlight.y;
+				graphics.moveTo(highlight.x, highlight.y);
+				graphics.lineTo(mouseX, mouseY);
 			}
 		}
 		

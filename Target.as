@@ -70,10 +70,10 @@ package
 				p.graphics.drawCircle(0, 0, r);
 				p.graphics.endFill();
 				
-				var t: Number = Math.random() * 0.5 + 0.5;
-				var d: Number = Math.random() * 0.5 + 0.2;
+				var t: Number = Math.random() * 0.5 + 0.9;
+				var d: Number = Math.random() * 0.2 + 0.2;
 				
-				TweenLite.to(p, t, {alpha: 0, delay: d, onComplete: fadeoutComplete, onCompleteParams: [p]});
+				TweenLite.to(p, t, {alpha: 0, scaleX: 0, scaleY: 0, delay: d, onComplete: fadeoutComplete, onCompleteParams: [p]});
 				
 				game.addParticle(p);
 			}
