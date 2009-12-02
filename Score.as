@@ -62,7 +62,7 @@ package
 				text += "\nNo hands!";
 			}
 			
-			spawnText(text, c.x);
+			spawnText(text, c);
 		}
 		
 		public function minus (c : Circle): void
@@ -100,12 +100,13 @@ package
 			TweenLite.to(retryButton, 1.0, {alpha: 1, delay: 1.0});
 			TweenLite.to(menuButton, 1.0, {alpha: 1, delay: 1.0});
 			
-			spawnText("Game Over", c.x);
+			spawnText("Game Over", c);
 		}
 		
-		public function spawnText (s: String, spawnX: Number): void
+		public function spawnText (s: String, circle: Circle): void
 		{
-			var spawnY: Number = 450;
+			var spawnX: Number = circle.x;
+			var spawnY: Number = circle.y;
 			
 			var font: String = null;
 			

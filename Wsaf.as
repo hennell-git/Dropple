@@ -18,7 +18,7 @@ package
 		
 		public static var circles: Array;
 		private var particles: Array;
-		private var targets: Array;
+		public var targets: Array;
 		
 		public var score: Score;
 		

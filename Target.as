@@ -11,12 +11,14 @@ package
 		
 		public var id: int;
 		
+		public var size: int;
+		
 		public function Target(id: int)
 		{
 			this.id = id;
 			
 			graphics.beginFill(Wsaf.colour(id));
-			graphics.drawRect(0, 0, 640/4, 50);
+			graphics.drawRect(0, 0, 640/4, 480);
 			graphics.endFill();
 			
 			/*graphics.beginFill(0x000000);
@@ -29,17 +31,19 @@ package
 			if (id != 0)
 			{
 				graphics.moveTo(0, -25);
-				graphics.lineTo(0, 50);
+				graphics.lineTo(0, 480);
 			}
 			
 			if (id != 3)
 			{
 				graphics.moveTo(160, -25);
-				graphics.lineTo(160, 50);
+				graphics.lineTo(160, 480);
 			}
 			
 			x = id * 640/4;
 			y = 430;
+			
+			size = 2;
 			
 			protectionImage = new Shape();
 			
@@ -60,7 +64,7 @@ package
 			{
 				var r: Number = Math.random() * 5 + 2;
 				var px: Number = Math.random() * (160 - r*2) + r + x;
-				var py: Number = 430 + r;
+				var py: Number = y + r;
 				var vx: Number = Math.random() * 0.04 - 0.02;
 				var vy: Number = -Math.random() * 0.1 - 0.1 + r * 0.01;
 				
@@ -85,7 +89,7 @@ package
 			
 			var score: Score = game.score;
 			
-			if (c.x > x && c.x < x + 160 && c.y + c.radius > 430)
+			if (c.x > x && c.x < x + 160 && c.y + c.radius > y)
 			{
 				c.active = false;
 				
@@ -99,6 +103,13 @@ package
 					
 					TweenLite.to(protectionImage, 0.5, {alpha: 1});
 					
+					if (isProtected)
+					{
+						size += 1;
+						
+						TweenLite.to(this, 0.5, {y: 480 - size*25});
+					}
+					
 					isProtected = true;
 				}
 				else
@@ -110,6 +121,10 @@ package
 						isProtected = false;
 					
 						TweenLite.to(protectionImage, 0.5, {alpha: 0});
+						
+						size = 2;
+						
+						TweenLite.to(this, 0.5, {y: 430});
 					
 						AudioControl.playWrong();
 					}
@@ -126,7 +141,7 @@ package
 					
 					c.vy = -Math.min(0.25, Math.abs(c.vy));
 					c.vx = 0;
-					c.y = 430 - c.radius;
+					c.y = y - c.radius;
 				}
 				
 				TweenLite.to(c, 0.5, {alpha: 0, onComplete: fadeoutComplete, onCompleteParams: [c]});
