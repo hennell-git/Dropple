@@ -24,48 +24,8 @@ package
 				
 				for each (var c: Circle in circles)
 				{
-					var r: Number = c.radius + 1;
+					checkBarrier(c, lx, ly);
 					
-					if (c.y + r <= ly)
-					{
-						continue;
-					}
-					
-					if (c.y > ly)
-					{
-						dx = c.x - lx;
-						
-						if (dx >= r) { continue; }
-						else if (dx <= -r) { continue; }
-						
-						c.vx *= -1;
-						
-						if (dx > 0) { c.x = lx + r; }
-						else        { c.x = lx - r; }
-					}
-					else
-					{
-						dx = c.x - lx;
-						dy = c.y - ly;
-						
-						dz = Math.sqrt(dx * dx + dy * dy);
-						
-						if (dz >= r)
-						{
-							continue;
-						}
-						
-						dx /= dz;
-						dy /= dz;
-						
-						c.x = lx + dx * r;
-						c.y = ly + dy * r;
-						
-						var vz: Number = dx * c.vx + dy * c.vy;
-						
-						c.vx -= 2 * dx * vz;
-						c.vy -= 2 * dy * vz;
-					}
 				}
 			}
 			
@@ -147,6 +107,56 @@ package
 						}
 					}
 				}
+			}
+		}
+		
+		private static function checkBarrier (c: Circle, lx: Number, ly: Number): void
+		{
+			var dx: Number;
+			var dy: Number;
+			var dz: Number;
+			
+			var r: Number = c.radius + 1;
+			
+			if (c.y + r <= ly)
+			{
+				return;
+			}
+			
+			if (c.y > ly)
+			{
+				dx = c.x - lx;
+				
+				if (dx >= r) { return; }
+				else if (dx <= -r) { return; }
+				
+				c.vx *= -1;
+				
+				if (dx > 0) { c.x = lx + r; }
+				else        { c.x = lx - r; }
+			}
+			else
+			{
+				dx = c.x - lx;
+				dy = c.y - ly;
+				
+				dz = Math.sqrt(dx * dx + dy * dy);
+				
+				if (dz >= r)
+				{
+					return;
+				}
+				
+				dx /= dz;
+				dy /= dz;
+				
+				c.x = lx + dx * r;
+				c.y = ly + dy * r;
+				
+				var vz: Number = dx * c.vx + dy * c.vy;
+				
+				c.vx -= 2 * dx * vz;
+				c.vy -= 2 * dy * vz;
 			}
 		}
 		

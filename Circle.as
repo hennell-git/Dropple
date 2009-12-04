@@ -27,7 +27,7 @@ package
 			x = radius + Math.random() * (480 - 2 * radius);
 			y = -radius;
 			
-			id = (Math.random() * 4);
+			id = nextRandomColour();
 			
 			if (x > id * 160) x += 160;
 			
@@ -86,9 +86,6 @@ package
 		{
 			if (mergeTarget) { return; }
 			
-			x += vx * dt;
-			y += vy * dt;
-			
 			if (y - radius < 0)
 			{
 				if (vy < 0)
@@ -108,6 +105,9 @@ package
 				vy += 0.0001 * dt;
 			}
 			
+			x += vx * dt;
+			y += vy * dt;
+			
 			if (x - radius < 0)
 			{
 				x = radius;
@@ -124,6 +124,22 @@ package
 		{
 			leftEye.draw();
 			rightEye.draw();
+		}
+		
+		private static var colourQueue: Array = new Array();
+		
+		private static function nextRandomColour (): int
+		{
+			if (colourQueue.length == 0) {
+				// shuffle from http://flassari.is/2009/04/as3-array-shuffle/
+				
+				var arr2: Array = [0, 0, 1, 1, 2, 2, 3, 3];
+				while (arr2.length > 0) {
+					colourQueue.push(arr2.splice(Math.round(Math.random() * (arr2.length - 1)), 1)[0]);
+				}
+			}
+			
+			return colourQueue.pop();
 		}
 		
 	}
