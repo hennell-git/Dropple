@@ -25,7 +25,6 @@ package
 				for each (var c: Circle in circles)
 				{
 					checkBarrier(c, lx, ly);
-					
 				}
 			}
 			
@@ -112,51 +111,36 @@ package
 		
 		private static function checkBarrier (c: Circle, lx: Number, ly: Number): void
 		{
-			var dx: Number;
-			var dy: Number;
-			var dz: Number;
+			var movement: Line = new Line(c.x - c.vx*20, c.y - c.vy*20, c.x, c.y);
+			var barrier: Line = new Line(lx, ly, lx, 500);
 			
 			var r: Number = c.radius + 1;
 			
-			if (c.y + r <= ly)
-			{
-				return;
-			}
+			var details: LineIntersection = new LineIntersection();
 			
-			if (c.y > ly)
+			if (Line.intersectsR(movement, barrier, r, details))
 			{
-				dx = c.x - lx;
+				c.x = details.x;
+				c.y = details.y;
 				
-				if (dx >= r) { return; }
-				else if (dx <= -r) { return; }
-				
-				c.vx *= -1;
-				
-				if (dx > 0) { c.x = lx + r; }
-				else        { c.x = lx - r; }
-			}
-			else
-			{
-				dx = c.x - lx;
-				dy = c.y - ly;
-				
-				dz = Math.sqrt(dx * dx + dy * dy);
-				
-				if (dz >= r)
-				{
-					return;
+				if (c.y < ly) {
+					var nx: Number = c.x - lx;
+					var ny: Number = c.y - ly;
+					var nz: Number = Math.sqrt(nx*nx + ny*ny);
+					
+					nx /= nz;
+					ny /= nz;
+					
+					var speed: Number = nx * c.vx + ny * c.vy;
+					
+					c.vx -= 1.5 * nx * speed;
+					c.vy -= 1.5 * ny * speed;
+				} else {
+					c.vx *= -0.5;
 				}
 				
-				dx /= dz;
-				dy /= dz;
-				
-				c.x = lx + dx * r;
-				c.y = ly + dy * r;
-				
-				var vz: Number = dx * c.vx + dy * c.vy;
-				
-				c.vx -= 2 * dx * vz;
-				c.vy -= 2 * dy * vz;
+				c.x += 20 * (1 - details.t) * c.vx;
+				c.y += 20 * (1 - details.t) * c.vy;
 			}
 		}
 		

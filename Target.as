@@ -93,8 +93,11 @@ package
 			{
 				c.active = false;
 				
-				MouseControl.dragTarget = null;
-				MouseControl.highlight = null;
+				if (c == MouseControl.dragTarget)
+				{
+					MouseControl.dragTarget = null;
+					MouseControl.highlight = null;
+				}
 				
 				if (id == c.id)
 				{
@@ -135,6 +138,9 @@ package
 						AudioControl.playGameOver();
 						
 						TweenLite.to(game.circleLayer, 2.0, {alpha: 0, delay: 2.0});
+						
+						MouseControl.dragTarget = null;
+						MouseControl.highlight = null;
 						
 						return; // this stops the offending circle from fading out early
 					}
