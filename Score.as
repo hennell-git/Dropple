@@ -15,8 +15,15 @@ package
 		
 		public var isGameOver: Boolean = false;
 		
-		public function Score()
+		public var messagesLayer: Sprite = new Sprite();
+		public var gameOverLayer: Sprite = new Sprite();
+		
+		private var game: Wsaf;
+		
+		public function Score(_game: Wsaf)
 		{
+			game = _game;
+			
 			scoreText = new NumberTextField(640/2, 15, "", TextFieldAutoSize.CENTER, 40);
 			
 			var textX : Number = 640 - 15;
@@ -77,7 +84,7 @@ package
 			var retryButton: Button = new Button("Again!", 32, 200, 0x0080FF);
 			
 			retryButton.x = 320 - retryButton.width / 2;
-			retryButton.y = 215 - retryButton.height / 2;
+			retryButton.y = 245 - retryButton.height / 2;
 			retryButton.alpha = 0;
 			
 			retryButton.addEventListener(MouseEvent.CLICK, function (event: MouseEvent): void {
@@ -87,15 +94,15 @@ package
 			var menuButton: Button = new Button("Menu", 32, 200, 0x00FF00);
 			
 			menuButton.x = 320 - menuButton.width / 2;
-			menuButton.y = 300 - menuButton.height / 2;
+			menuButton.y = 330 - menuButton.height / 2;
 			menuButton.alpha = 0;
 			
 			menuButton.addEventListener(MouseEvent.CLICK, function (event: MouseEvent): void {
 				Main.screen = new MainMenu();
 			});
 			
-			addChild(retryButton);
-			addChild(menuButton);
+			gameOverLayer.addChild(retryButton);
+			gameOverLayer.addChild(menuButton);
 			
 			TweenLite.to(retryButton, 1.0, {alpha: 1, delay: 1.0});
 			TweenLite.to(menuButton, 1.0, {alpha: 1, delay: 1.0});
@@ -121,15 +128,19 @@ package
 			
 			spawnY -= 16 * (noOfLines - 1);
 			
-			addChild(text);
-			
-			TweenLite.to(text, 1.0, {y: (spawnY - 65)});
+			messagesLayer.addChild(text);
 			
 			if (s == "Game Over")
 			{
 				TweenLite.to(text, 1.0, {
+					y: (spawnY - 65),
+					onComplete: gameOverLayer.addChild,
+					onCompleteParams: [text]
+				});
+				
+				TweenLite.to(text, 1.0, {
 					x: 320 - text.width * 5 / 2,
-					y: 120 - text.height * 5 / 2,
+					y: 140 - text.height * 5 / 2,
 					scaleX: 5,
 					scaleY: 5,
 					delay: 1.0,
@@ -138,11 +149,13 @@ package
 			}
 			else
 			{
+				TweenLite.to(text, 1.0, {y: (spawnY - 65)});
+				
 				TweenLite.to(text, 0.5, {
 					alpha: 0,
 					delay: 0.6,
 					overwrite: 0,
-					onComplete: removeChild,
+					onComplete: messagesLayer.removeChild,
 					onCompleteParams: [text]
 				});
 			}

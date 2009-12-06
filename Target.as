@@ -137,7 +137,8 @@ package
 					
 						AudioControl.playGameOver();
 						
-						TweenLite.to(game.circleLayer, 2.0, {alpha: 0, delay: 2.0});
+						TweenLite.to(game.circleLayer, 2.0, {alpha: 0.5, delay: 2.0});
+						TweenLite.to(game.targetLayer, 2.0, {alpha: 0.5, delay: 2.0});
 						
 						MouseControl.dragTarget = null;
 						MouseControl.highlight = null;

@@ -26,7 +26,7 @@ package
 		
 		public var particleLayer: Sprite;
 		public var circleLayer: Sprite;
-		private var targetLayer: Sprite;
+		public var targetLayer: Sprite;
 		
 		private var mouseControl: MouseControl;
 		
@@ -45,7 +45,7 @@ package
 			particleLayer = new Sprite();
 			addChild(particleLayer);
 			
-			score = new Score();
+			score = new Score(this);
 			
 			addChild(score);
 			
@@ -57,7 +57,9 @@ package
 			targetLayer = new Sprite();
 			
 			addChild(circleLayer);
+			addChild(score.messagesLayer);
 			addChild(targetLayer);
+			addChild(score.gameOverLayer);
 			
 			mouseControl = new MouseControl();
 			
@@ -164,6 +166,8 @@ package
 		private function draw (): void
 		{
 			mouseControl.draw();
+			
+			if (score.isGameOver) { return; }
 			
 			for each (var circle: Circle in circles)
 			{
