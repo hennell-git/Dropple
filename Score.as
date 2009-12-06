@@ -50,7 +50,7 @@ package
 			addChild(bestComboText);
 		}
 		
-		public function plus (c : Circle): void
+		public function plus (c : Circle, t: Target): void
 		{
 			var scoreAdd : int = 10 * (combo + 1);
 			
@@ -69,15 +69,15 @@ package
 				text += "\nNo hands!";
 			}
 			
-			spawnText(text, c);
+			spawnText(text, c, t);
 		}
 		
-		public function minus (c : Circle): void
+		public function minus (c : Circle, t: Target): void
 		{
 			combo = 0;
 		}
 		
-		public function gameOver (c: Circle): void
+		public function gameOver (c: Circle, t: Target): void
 		{
 			isGameOver = true;
 			
@@ -107,13 +107,13 @@ package
 			TweenLite.to(retryButton, 1.0, {alpha: 1, delay: 1.0});
 			TweenLite.to(menuButton, 1.0, {alpha: 1, delay: 1.0});
 			
-			spawnText("Game Over", c);
+			spawnText("Game Over", c, t);
 		}
 		
-		public function spawnText (s: String, circle: Circle): void
+		public function spawnText (s: String, circle: Circle, target: Target): void
 		{
 			var spawnX: Number = circle.x;
-			var spawnY: Number = circle.y;
+			var spawnY: Number = target.y;
 			
 			var font: String = null;
 			

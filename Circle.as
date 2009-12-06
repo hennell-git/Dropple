@@ -6,6 +6,9 @@ package
 	{
 		public var radius: Number = 20;
 		
+		public var oldX: Number;
+		public var oldY: Number;
+		
 		public var vy: Number;
 		public var vx: Number;
 		public var id: int;
@@ -85,6 +88,9 @@ package
 		public function update (dt: int): void
 		{
 			if (mergeTarget) { return; }
+			
+			oldX = x;
+			oldY = y;
 			
 			if (y - radius < 0)
 			{

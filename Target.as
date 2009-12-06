@@ -101,7 +101,7 @@ package
 				
 				if (id == c.id)
 				{
-					score.plus(c);
+					score.plus(c, this);
 					AudioControl.playGood();
 					
 					TweenLite.to(protectionImage, 0.5, {alpha: 1});
@@ -119,7 +119,7 @@ package
 				{
 					if (isProtected)
 					{
-						score.minus(c);
+						score.minus(c, this);
 						
 						isProtected = false;
 					
@@ -133,7 +133,7 @@ package
 					}
 					else
 					{
-						score.gameOver(c);
+						score.gameOver(c, this);
 					
 						AudioControl.playGameOver();
 						

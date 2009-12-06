@@ -111,7 +111,7 @@ package
 		
 		private static function checkBarrier (c: Circle, lx: Number, ly: Number): void
 		{
-			var movement: Line = new Line(c.x - c.vx*20, c.y - c.vy*20, c.x, c.y);
+			var movement: Line = new Line(c.oldX, c.oldY, c.x, c.y);
 			var barrier: Line = new Line(lx, ly, lx, 500);
 			
 			var r: Number = c.radius + 1;
@@ -120,24 +120,37 @@ package
 			
 			if (Line.intersectsR(movement, barrier, r, details))
 			{
-				c.x = details.x;
-				c.y = details.y;
+				var nx: Number;
+				var ny: Number;
 				
 				if (c.y < ly) {
-					var nx: Number = c.x - lx;
-					var ny: Number = c.y - ly;
+					nx = details.x - lx;
+					ny = details.y - ly;
 					var nz: Number = Math.sqrt(nx*nx + ny*ny);
 					
 					nx /= nz;
 					ny /= nz;
-					
-					var speed: Number = nx * c.vx + ny * c.vy;
-					
-					c.vx -= 1.5 * nx * speed;
-					c.vy -= 1.5 * ny * speed;
 				} else {
-					c.vx *= -0.5;
+					nx = (details.x > lx) ? 1 : -1;
+					ny = 0;
+					
+					ly = details.y;
 				}
+				
+				//if (details.t == 0) {
+					c.x = lx + c.radius * nx;
+					c.y = ly + c.radius * ny;
+				/*} else {
+					c.x = details.x;
+					c.y = details.y;
+				}*/
+				
+				var speed: Number = nx * c.vx + ny * c.vy;
+				
+				c.vx += nx * (0.5 * Math.abs(speed) - speed);
+				c.vy += ny * (0.5 * Math.abs(speed) - speed);
+				
+				//if (c.vx * nx + c.vy * ny < 0) { trace("Hmm"); }
 				
 				c.x += 20 * (1 - details.t) * c.vx;
 				c.y += 20 * (1 - details.t) * c.vy;
