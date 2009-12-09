@@ -110,7 +110,9 @@ package
 					{
 						size += 1;
 						
-						TweenLite.to(this, 0.5, {y: 480 - size*25});
+						if (Settings.eventful) {
+							TweenLite.to(this, 0.5, {y: 480 - size*25});
+						}
 					}
 					
 					isProtected = true;
@@ -127,7 +129,9 @@ package
 						
 						size = 2;
 						
-						TweenLite.to(this, 0.5, {y: 430});
+						if (Settings.eventful) {
+							TweenLite.to(this, 0.5, {y: 430});
+						}
 					
 						AudioControl.playWrong();
 					}

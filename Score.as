@@ -13,6 +13,8 @@ package
 		private var bestComboText: NumberTextField;
 		private var livesText: NumberTextField;
 		
+		public var debug: NumberTextField;
+		
 		public var isGameOver: Boolean = false;
 		
 		public var messagesLayer: Sprite = new Sprite();
@@ -41,6 +43,9 @@ package
 			highScoreText = new NumberTextField(textX, textY, "High score: ", TextFieldAutoSize.RIGHT);
 			textY += 20;
 			
+			debug = new NumberTextField(textX, textY, "Debug: ", TextFieldAutoSize.RIGHT);
+			textY += 20;
+			
 			//livesText.value = 5;
 			
 			addChild(scoreText);
@@ -48,6 +53,7 @@ package
 			addChild(highScoreText);
 			//addChild(comboText);
 			addChild(bestComboText);
+			addChild(debug);
 		}
 		
 		public function plus (c : Circle, t: Target): void
@@ -101,6 +107,7 @@ package
 				Main.screen = new MainMenu();
 			});
 			
+			gameOverLayer.addChild(this);
 			gameOverLayer.addChild(retryButton);
 			gameOverLayer.addChild(menuButton);
 			

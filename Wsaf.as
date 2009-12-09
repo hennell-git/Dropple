@@ -82,6 +82,8 @@ package
 			
 			timer = 500;
 			
+			difficulty = 0;
+			
 			time = getTimer();
 			
 			if (stage)
@@ -120,19 +122,24 @@ package
 			if (score.isGameOver) { return; }
 			
 			totalTime += dt;
-			timer -= dt;
 			
 			mouseControl.update(circles);
 			
 			var circle: Circle;
 			
-			difficulty = totalTime / 100000.0 + score.combo / 2.0;
+			difficulty += dt * 0.00005;
 			
-			//score.score = difficulty;
+			score.debug.value = difficulty;
 			
-			if (timer < 0)
+			if (circles.length < difficulty)
 			{
-				timer = Math.max(2500 - difficulty * 500, 500) + Math.random() * 1000;
+				timer -= dt;
+			} else {
+				timer -= 1;
+			}
+			
+			if (timer < 0) {
+				timer = 250 + Math.random() * 250;
 				
 				circle = new Circle();
 				

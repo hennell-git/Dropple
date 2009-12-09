@@ -137,20 +137,17 @@ package
 					ly = details.y;
 				}
 				
-				//if (details.t == 0) {
-					c.x = lx + c.radius * nx;
-					c.y = ly + c.radius * ny;
-				/*} else {
-					c.x = details.x;
-					c.y = details.y;
-				}*/
+				var r: Number = c.radius + 1;
+				
+				c.x = lx + r * nx;
+				c.y = ly + r * ny;
 				
 				var speed: Number = nx * c.vx + ny * c.vy;
 				
-				c.vx += nx * (0.5 * Math.abs(speed) - speed);
-				c.vy += ny * (0.5 * Math.abs(speed) - speed);
-				
-				//if (c.vx * nx + c.vy * ny < 0) { trace("Hmm"); }
+				if (speed < 0) { // moving towards barrier (which it should be)
+					c.vx -= 1.5 * nx * speed;
+					c.vy -= 1.5 * ny * speed;
+				}
 				
 				c.x += 20 * (1 - details.t) * c.vx;
 				c.y += 20 * (1 - details.t) * c.vy;

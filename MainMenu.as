@@ -57,12 +57,25 @@ package
 			
 			var button: Button;
 			
-			button = new Button("Play", 32, 300, 0xFF0000);
+			button = new Button("Play Uneventful Mode", 32, 300, 0xFF0000);
 			button.x = 320 - button.width / 2;
 			button.y = 250;
 			
 			button.addEventListener(MouseEvent.CLICK, function (event: MouseEvent): void {
 				Settings.absorb = false;
+				Settings.eventful = false;
+				Main.screen = new Wsaf();
+			});
+			
+			addChild(button);
+			
+			button = new Button("Play Eventful Mode", 32, 300, 0x0080FF);
+			button.x = 320 - button.width / 2;
+			button.y = 330;
+			
+			button.addEventListener(MouseEvent.CLICK, function (event: MouseEvent): void {
+				Settings.absorb = false;
+				Settings.eventful = true;
 				Main.screen = new Wsaf();
 			});
 			
