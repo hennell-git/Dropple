@@ -14,8 +14,6 @@ package
 		
 		private var timer: int;
 		
-		private var difficulty: Number;
-		
 		public static var circles: Array;
 		private var particles: Array;
 		public var targets: Array;
@@ -82,8 +80,6 @@ package
 			
 			timer = 500;
 			
-			difficulty = 0;
-			
 			time = getTimer();
 			
 			if (stage)
@@ -127,11 +123,9 @@ package
 			
 			var circle: Circle;
 			
-			difficulty += dt * 0.00005;
+			score.difficulty += dt * 0.00005;
 			
-			score.debug.value = difficulty;
-			
-			if (circles.length < difficulty)
+			if (circles.length < score.difficulty)
 			{
 				timer -= dt;
 			} else {

@@ -13,7 +13,7 @@ package
 		private var bestComboText: NumberTextField;
 		private var livesText: NumberTextField;
 		
-		public var debug: NumberTextField;
+		private var _difficulty: Number = 0;
 		
 		public var isGameOver: Boolean = false;
 		
@@ -43,9 +43,6 @@ package
 			highScoreText = new NumberTextField(textX, textY, "High score: ", TextFieldAutoSize.RIGHT);
 			textY += 20;
 			
-			debug = new NumberTextField(textX, textY, "Debug: ", TextFieldAutoSize.RIGHT);
-			textY += 20;
-			
 			//livesText.value = 5;
 			
 			addChild(scoreText);
@@ -53,7 +50,6 @@ package
 			addChild(highScoreText);
 			//addChild(comboText);
 			addChild(bestComboText);
-			addChild(debug);
 		}
 		
 		public function plus (c : Circle, t: Target): void
@@ -68,6 +64,8 @@ package
 			score += scoreAdd;
 			combo += 1;
 			
+			difficulty += 0.1;
+			
 			var text : String = "+" + scoreAdd;
 			
 			if (! c.touched)
@@ -81,6 +79,7 @@ package
 		public function minus (c : Circle, t: Target): void
 		{
 			combo = 0;
+			difficulty -= 0.5;
 		}
 		
 		public function gameOver (c: Circle, t: Target): void
@@ -206,6 +205,16 @@ package
 		public function get combo():int
 		{
 			return comboText.value;
+		}
+		
+		public function set difficulty (newValue: Number): void
+		{
+			_difficulty = Math.max(newValue, 0);
+		}
+		
+		public function get difficulty (): Number
+		{
+			return _difficulty;
 		}
 		
 	}

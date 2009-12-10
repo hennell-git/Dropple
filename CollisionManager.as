@@ -137,8 +137,6 @@ package
 					ly = details.y;
 				}
 				
-				var r: Number = c.radius + 1;
-				
 				c.x = lx + r * nx;
 				c.y = ly + r * ny;
 				
