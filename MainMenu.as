@@ -62,9 +62,14 @@ package
 			button.y = 250;
 			
 			button.addEventListener(MouseEvent.CLICK, function (event: MouseEvent): void {
-				Settings.absorb = false;
+				//Settings.absorb = false;
 				Settings.eventful = false;
 				Main.screen = new Wsaf();
+				
+				/*Main.screen.rotation = 180;
+				
+				Main.screen.x = 640;
+				Main.screen.y = 480;*/
 			});
 			
 			addChild(button);
@@ -74,9 +79,14 @@ package
 			button.y = 330;
 			
 			button.addEventListener(MouseEvent.CLICK, function (event: MouseEvent): void {
-				Settings.absorb = false;
+				//Settings.absorb = false;
 				Settings.eventful = true;
 				Main.screen = new Wsaf();
+				
+				/*Main.screen.rotation = 180;
+				
+				Main.screen.x = 640;
+				Main.screen.y = 480;*/
 			});
 			
 			addChild(button);

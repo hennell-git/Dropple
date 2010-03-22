@@ -24,6 +24,8 @@ Bonuses for getting x of the same colour in a row:
 	When something hits that colour you lose combo but reduce x
 	Lose if anything hits the top of the screen
 
+Touch everything dropple
+
 
 Powerups:
 
