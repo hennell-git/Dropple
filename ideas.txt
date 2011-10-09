@@ -12,6 +12,8 @@ Sort by different criteria
 Powerups for getting three of the same colour in a row
 Clouds
 
+Sound effect for vulnerable target
+
 Protective star
 
 Record stats and inform on game over
