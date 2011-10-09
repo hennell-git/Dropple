@@ -36,57 +36,50 @@ package
 			
 			addChild(new Main());
 			
-			if (this.loaderInfo.bytesLoaded < this.loaderInfo.bytesTotal)
+			preloader = new Sprite();
+			
+			circles = [];
+			
+			circlesLayer = new Sprite();
+			
+			bigCircle = new Circle();
+			
+			bigCircle.x = 320;
+			bigCircle.y = 240;
+			
+			circlesLayer.addChild(bigCircle);
+			
+			text = new MyTextField(0, 0, "0%", "center", 13);
+			
+			text.y = -text.height * 0.33;
+			
+			if (bigCircle.id == 2)
 			{
-				preloader = new Sprite();
-				
-				circles = [];
-				
-				circlesLayer = new Sprite();
-				
-				bigCircle = new Circle();
-				
-				bigCircle.x = 320;
-				bigCircle.y = 240;
-				
-				circlesLayer.addChild(bigCircle);
-				
-				text = new MyTextField(0, 0, "0%", "center", 13);
-				
-				text.y = -text.height * 0.33;
-				
-				if (bigCircle.id == 2)
-				{
-					text.textColor = 0xFFFFFF;
-				}
-				
-				bigCircle.addChild(text);
-				
-				preloader.addChild(circlesLayer);
-				
-				mouseControl = new MouseControl();
-				
-				mouseControl.init();
-				
-				preloader.addChild(mouseControl);
-				
-				Main.screen = preloader;
-				
-				time = getTimer();
-				
-				stage.addEventListener(MouseEvent.MOUSE_DOWN, MouseControl.onMouseDown);
-				stage.addEventListener(MouseEvent.MOUSE_UP, MouseControl.onMouseUp);
-				
-				addEventListener(Event.ENTER_FRAME, onEnterFrame);
-				
-				preloader.alpha = 0;
-				
-				TweenLite.to(preloader, 1.0, {alpha: 1});
+				text.textColor = 0xFFFFFF;
 			}
-			else
-			{
-				startup();
-			}
+			
+			bigCircle.addChild(text);
+			
+			preloader.addChild(circlesLayer);
+			
+			mouseControl = new MouseControl();
+			
+			mouseControl.init();
+			
+			preloader.addChild(mouseControl);
+			
+			Main.screen = preloader;
+			
+			time = getTimer();
+			
+			stage.addEventListener(MouseEvent.MOUSE_DOWN, MouseControl.onMouseDown);
+			stage.addEventListener(MouseEvent.MOUSE_UP, MouseControl.onMouseUp);
+			
+			addEventListener(Event.ENTER_FRAME, onEnterFrame);
+			
+			preloader.alpha = 0;
+			
+			TweenLite.to(preloader, 1.0, {alpha: 1});
 		}
 		
 		private function onEnterFrame (e:Event): void
