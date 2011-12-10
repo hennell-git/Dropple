@@ -12,7 +12,12 @@ Sort by different criteria
 Powerups for getting three of the same colour in a row
 Clouds
 
+Multiplayer!
+
+Eventful mode: slowly drain over time
+
 Sound effect for vulnerable target
+-- Need to make it obvious that's bad!
 
 Protective star
 
