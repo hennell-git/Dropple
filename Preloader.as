@@ -181,7 +181,7 @@ package
 
 		private function removeCirclesFilter (c: Circle, index: int, arr: Array): Boolean
 		{
-			if (c.y > 480 + c.radius)
+			if (c.y > G.H + c.radius)
 			{
 				if (c == MouseControl.dragTarget)
 				{

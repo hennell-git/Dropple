@@ -185,7 +185,7 @@ package
 		
 		private function removeCirclesFilter (c: Circle, index: int, arr: Array): Boolean
 		{
-			targets[int(c.x / 160)].test(c, this);
+			targets[int(c.x*4 / G.W)].test(c, this);
 			
 			if (c.dead)
 			{

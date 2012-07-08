@@ -26,9 +26,9 @@ package
 		{
 			game = _game;
 			
-			scoreText = new NumberTextField(640/2, 15, "", TextFieldAutoSize.CENTER, 40);
+			scoreText = new NumberTextField(G.W/2, 15, "", TextFieldAutoSize.CENTER, 40);
 			
-			var textX : Number = 640 - 15;
+			var textX : Number = G.W - 15;
 			var textY : Number = 10;
 			
 			/*livesText = new NumberTextField(textX, textY, "Lives: ", TextFieldAutoSize.RIGHT);

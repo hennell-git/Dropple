@@ -18,12 +18,12 @@ package
 			this.id = id;
 			
 			graphics.beginFill(Wsaf.colour(id));
-			graphics.drawRect(0, 0, 640/4, 480);
+			graphics.drawRect(0, 0, G.W/4, G.H);
 			graphics.endFill();
 			
 			/*graphics.beginFill(0x000000);
 			graphics.drawRect(0, -25, 1, 75);
-			graphics.drawRect(640/4 - 1, -25, 1, 75);
+			graphics.drawRect(G.W/4 - 1, -25, 1, 75);
 			graphics.endFill();*/
 			
 			graphics.lineStyle(2, 0x000000);
@@ -31,17 +31,17 @@ package
 			if (id != 0)
 			{
 				graphics.moveTo(0, -25);
-				graphics.lineTo(0, 480);
+				graphics.lineTo(0, G.H);
 			}
 			
 			if (id != 3)
 			{
-				graphics.moveTo(160, -25);
-				graphics.lineTo(160, 480);
+				graphics.moveTo(G.W/4, -25);
+				graphics.lineTo(G.W/4, G.H);
 			}
 			
-			x = id * 640/4;
-			y = 430;
+			x = id * G.W/4;
+			y = G.H - 50;
 			
 			size = 2;
 			
@@ -63,7 +63,7 @@ package
 			if (! isProtected && Math.random() < 0.5)
 			{
 				var r: Number = Math.random() * 5 + 2;
-				var px: Number = Math.random() * (160 - r*2) + r + x;
+				var px: Number = Math.random() * (G.W/4 - r*2) + r + x;
 				var py: Number = y + r;
 				var vx: Number = Math.random() * 0.04 - 0.02;
 				var vy: Number = -Math.random() * 0.1 - 0.1 + r * 0.01;
@@ -89,7 +89,7 @@ package
 			
 			var score: Score = game.score;
 			
-			if (c.x > x && c.x < x + 160 && c.y + c.radius > y)
+			if (c.x > x && c.x < x + G.W/4 && c.y + c.radius > y)
 			{
 				c.active = false;
 				
@@ -111,7 +111,7 @@ package
 						size += 1;
 						
 						if (Settings.eventful) {
-							TweenLite.to(this, 0.5, {y: 480 - size*25});
+							TweenLite.to(this, 0.5, {y: G.H - size*25});
 						}
 					}
 					
@@ -130,7 +130,7 @@ package
 						size = 2;
 						
 						if (Settings.eventful) {
-							TweenLite.to(this, 0.5, {y: 430});
+							TweenLite.to(this, 0.5, {y: G.H - 50});
 						}
 					
 						AudioControl.playWrong();

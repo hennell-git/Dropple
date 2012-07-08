@@ -68,8 +68,8 @@ package
 				
 				/*Main.screen.rotation = 180;
 				
-				Main.screen.x = 640;
-				Main.screen.y = 480;*/
+				Main.screen.x = G.W;
+				Main.screen.y = G.H;*/
 			});
 			
 			addChild(button);
@@ -85,8 +85,8 @@ package
 				
 				/*Main.screen.rotation = 180;
 				
-				Main.screen.x = 640;
-				Main.screen.y = 480;*/
+				Main.screen.x = G.W;
+				Main.screen.y = G.H;*/
 			});
 			
 			addChild(button);

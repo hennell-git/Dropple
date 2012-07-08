@@ -27,12 +27,12 @@ package
 		
 		public function Circle()
 		{
-			x = radius + Math.random() * (480 - 2 * radius);
+			x = radius + Math.random() * (G.W*0.75 - 2 * radius);
 			y = -radius;
 			
 			id = nextRandomColour();
 			
-			if (x > id * 160) x += 160;
+			if (x > id * G.W/4) x += G.W/4;
 			
 			vx = 0;
 			vy = 0.05 + 0.05 * Math.random();
@@ -100,9 +100,9 @@ package
 					vy = Math.max(-0.5*vy, vy);
 				}
 			}
-			/*else if (y + radius > 480)
+			/*else if (y + radius > G.H)
 			{
-				y = 480 - radius
+				y = G.H - radius
 				vy = Math.min(-0.5*vy, 0);
 			}*/
 			
@@ -119,9 +119,9 @@ package
 				x = radius;
 				vx *= -0.5;
 			}
-			else if (x + radius > 640)
+			else if (x + radius > G.W)
 			{
-				x = 640 - radius;
+				x = G.W - radius;
 				vx *= -0.5;
 			}
 		}

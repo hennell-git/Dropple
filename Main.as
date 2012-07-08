@@ -15,6 +15,9 @@ package
 			screenObj = newScreenObj;
 			
 			parentObj.addChild(screenObj);
+			
+			/*screenObj.rotation = 90;
+			screenObj.x = G.H;*/
 		}
 		
 		public static function get screen (): DisplayObject
