@@ -9,7 +9,7 @@ package
 	import flash.utils.getTimer;
 	import gs.*;
 
-	[SWF (width=640, height=480, frameRate=50)]
+	[SWF (width=480, height=640, frameRate=50)]
 
 	public class Preloader extends Sprite
 	{

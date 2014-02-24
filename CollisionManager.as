@@ -112,7 +112,7 @@ package
 		private static function checkBarrier (c: Circle, lx: Number, ly: Number): void
 		{
 			var movement: Line = new Line(c.oldX, c.oldY, c.x, c.y);
-			var barrier: Line = new Line(lx, ly, lx, 500);
+			var barrier: Line = new Line(lx, ly, lx, G.H + 20);
 			
 			var r: Number = c.radius + 1;
 			
