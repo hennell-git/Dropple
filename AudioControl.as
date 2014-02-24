@@ -57,7 +57,7 @@ package
 			wrong = new wrongSrc();
 			gameOver = new gameOverSrc();
 			
-			//playMusic();
+			playMusic();
 		}
 
 		public function toggleSound (e : Event) : void
@@ -70,7 +70,7 @@ package
 			if (mute) {
 				stopMusic();
 			} else {
-				//playMusic();
+				playMusic();
 			}
 		}
 		
@@ -99,7 +99,7 @@ package
 				function runMe():void{
 				    if (musicChannel.position > placeToStop) {
 				        musicChannel.stop();
-				       // musicChannel = music.play(leader);
+				        musicChannel = music.play(leader);
 				    }
 				}
 			}
